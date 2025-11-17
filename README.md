@@ -75,8 +75,8 @@ sh /root/login.sh debug
 ## 技术实现简述
 
 本脚本通过以下步骤模拟认证流程：
-1.  首先访问学校指定的打开认证页面的 IP (`2.2.2.2`)，校园网认证系统会用返回的一个简单 html 页面，通过其中包含的 js 代码跳转到 Portal 登录页面 URL。
-2.  脚本从重定向的 URL (`http://10.5.0.11/portal.do?...`) 中提取出 `wlanuserip`, `wlanacname`, `mac`, `vlan` 等关键参数。
+1.  首先访问学校指定的打开认证页面的 IP (`2.2.2.2`)，校园网认证系统会用返回的一个简单 html 页面，包含跳转到 Portal 登录页面 URL的 js 代码。
+2.  脚本从 js 代码中获取重定向的 URL (`http://10.5.0.11/portal.do?...`) 并提取出 `wlanuserip`, `wlanacname`, `mac`, `vlan` 等关键参数。
 3.  最后，脚本将提取出的参数与用户配置的账号密码组合，构造一个 GET 请求发送到认证接口 `http://10.5.0.11/quickauth.do`，从而完成认证。认证成功会返回包含 `"code":"0"` 和 `"message":"认证成功"` 等内容的 JSON 数据。
 
 ## 免责声明
